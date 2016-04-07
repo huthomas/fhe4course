@@ -26,3 +26,5 @@ Bundle-ClassPath: libs/google-api-client-1.20.0.jar,
 Export-Package: at.example.calendar.google,
  com.google.api.services.calendar.model
 Require-Bundle: javax.servlet;bundle-version="3.0.0"
+Service-Component: OSGI-INF/service.xml
+Bundle-ActivationPolicy: lazy

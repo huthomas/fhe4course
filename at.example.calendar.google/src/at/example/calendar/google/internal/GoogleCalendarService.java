@@ -18,7 +18,10 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.CalendarScopes;
+import com.google.api.services.calendar.model.CalendarList;
+import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.Events;
 
 import at.example.calendar.google.IGoogleCalendarService;
 
@@ -31,18 +34,6 @@ public class GoogleCalendarService implements IGoogleCalendarService {
 	private Calendar calendarService;
 	private JsonFactory jsonFactory;
 	private HttpTransport httpTransport;
-
-	@Override
-	public List<String> getCalendarIds() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Event> getEvents(String calendarId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	protected Calendar getCalendarService() throws GeneralSecurityException, IOException {
 		if (calendarService == null) {
@@ -80,5 +71,41 @@ public class GoogleCalendarService implements IGoogleCalendarService {
 						.setDataStoreFactory(new FileDataStoreFactory(DATA_STORE_DIR)).build();
 		// authorize
 		return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
+	}
+
+	@Override
+	public List<CalendarListEntry> getCalendars() throws GeneralSecurityException, IOException {
+		Calendar gService = getCalendarService();
+		CalendarList cList = gService.calendarList().list().execute();
+		if (cList != null && !cList.isEmpty()) {
+			return cList.getItems();
+		}
+		return Collections.emptyList();
+	}
+
+	@Override
+	public List<Event> getEvents(CalendarListEntry calendar) throws GeneralSecurityException, IOException {
+		Calendar gService = getCalendarService();
+		Events events = gService.events().list(calendar.getId()).execute();
+		if (events != null && !events.isEmpty()) {
+			return events.getItems();
+		}
+		return Collections.emptyList();
+	}
+
+	@Override
+	public com.google.api.services.calendar.model.Calendar createCalendar(String summary)
+			throws GeneralSecurityException, IOException {
+		Calendar gService = getCalendarService();
+
+		// Create a new calendar
+		com.google.api.services.calendar.model.Calendar calendar = new com.google.api.services.calendar.model.Calendar();
+		calendar.setSummary(summary);
+
+		// Insert the new calendar
+		com.google.api.services.calendar.model.Calendar createdCalendar = gService.calendars().insert(calendar)
+				.execute();
+
+		return createdCalendar;
 	}
 }
