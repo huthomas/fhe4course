@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_rwWrYP1VEeWKXOIqvDBQCg" elementId="org.eclipse.e4.ide.application" bindingContexts="_rwWraf1VEeWKXOIqvDBQCg">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_rwWrYf1VEeWKXOIqvDBQCg" label="at.example.calendar" width="500" height="400">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_lL5DYP1WEeWKXOIqvDBQCg" elementId="at.example.calendar.perspectivestack.0">
+      <children xsi:type="advanced:Perspective" xmi:id="_l_UrcP1WEeWKXOIqvDBQCg" elementId="at.example.calendar.perspective.0">
+        <children xsi:type="basic:PartStack" xmi:id="_nAsB0P1WEeWKXOIqvDBQCg" elementId="at.example.calendar.partstack.0">
+          <children xsi:type="basic:Part" xmi:id="_oU_iUP1WEeWKXOIqvDBQCg" elementId="at.example.calendar.part.browser" contributionURI="bundleclass://at.example.calendar/at.example.calendar.parts.BrowserPart" label="browser">
+            <toolbar xmi:id="_6R_EoP1cEeWKXOIqvDBQCg" elementId="at.example.calendar.toolbar.0">
+              <children xsi:type="menu:HandledToolItem" xmi:id="_75qNEP1cEeWKXOIqvDBQCg" elementId="at.example.calendar.handledtoolitem.newcalendar" label="new calendar" command="_0FGL8P1ZEeWKXOIqvDBQCg"/>
+            </toolbar>
+          </children>
+          <children xsi:type="basic:Part" xmi:id="_bztgIP1jEeW-8cwmcVyK2g" elementId="at.example.calendar.part.list" contributionURI="bundleclass://at.example.calendar/at.example.calendar.parts.EventListPart" label="list">
+            <toolbar xmi:id="_D7FhUP1nEeW-8cwmcVyK2g" elementId="at.example.calendar.toolbar.1">
+              <children xsi:type="menu:HandledToolItem" xmi:id="_FKmocP1nEeW-8cwmcVyK2g" elementId="at.example.calendar.handledtoolitem.loadevents" label="load events" command="_7lDf8P1lEeW-8cwmcVyK2g"/>
+            </toolbar>
+          </children>
+        </children>
+      </children>
+    </children>
+  </children>
+  <handlers xmi:id="_-JGngP1ZEeWKXOIqvDBQCg" elementId="at.example.calendar.handler.add.calendar" contributionURI="bundleclass://at.example.calendar/at.example.calendar.handlers.AddCalendarHandler" command="_0FGL8P1ZEeWKXOIqvDBQCg"/>
+  <handlers xmi:id="__aBmYP1lEeW-8cwmcVyK2g" elementId="at.example.calendar.handler.events.load" contributionURI="bundleclass://at.example.calendar/at.example.calendar.handlers.EventsLoadHandler" command="_7lDf8P1lEeW-8cwmcVyK2g"/>
+  <rootContext xmi:id="_rwWraf1VEeWKXOIqvDBQCg" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
+    <children xmi:id="_rwWrav1VEeWKXOIqvDBQCg" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
+    <children xmi:id="_rwWra_1VEeWKXOIqvDBQCg" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
+  </rootContext>
+  <commands xmi:id="_0FGL8P1ZEeWKXOIqvDBQCg" elementId="at.example.calendar.command.add.calendar" commandName="add calendar"/>
+  <commands xmi:id="_7lDf8P1lEeW-8cwmcVyK2g" elementId="at.example.calendar.command.events.load" commandName="events load"/>
+  <addons xmi:id="_rwWrYv1VEeWKXOIqvDBQCg" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_rwWrY_1VEeWKXOIqvDBQCg" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_rwWrZP1VEeWKXOIqvDBQCg" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_rwWrZf1VEeWKXOIqvDBQCg" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_rwWrZv1VEeWKXOIqvDBQCg" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
+  <addons xmi:id="_rwWrZ_1VEeWKXOIqvDBQCg" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_rwWraP1VEeWKXOIqvDBQCg" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+</application:Application>
