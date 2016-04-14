@@ -15,4 +15,6 @@ public interface IGoogleCalendarService {
 	public List<Event> getEvents(CalendarListEntry calendar) throws GeneralSecurityException, IOException;
 
 	public Calendar createCalendar(String name) throws GeneralSecurityException, IOException;
+
+	public void saveEvent(Event event) throws GeneralSecurityException, IOException;
 }

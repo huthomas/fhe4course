@@ -108,4 +108,11 @@ public class GoogleCalendarService implements IGoogleCalendarService {
 
 		return createdCalendar;
 	}
+
+	@Override
+	public void saveEvent(Event event) throws GeneralSecurityException, IOException {
+		Calendar gService = getCalendarService();
+
+		gService.events().update("primary", event.getId(), event).execute();
+	}
 }
