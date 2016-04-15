@@ -3,13 +3,14 @@ package at.example.calendar.handlers;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -35,12 +36,12 @@ public class EventsLoadHandler {
 				System.out.println(calendarListEntry.getSummary());
 				if (calendarListEntry.getSummary().equals("fhe4course@gmail.com")) {
 					List<Event> events = gService.getEvents(calendarListEntry);
-					List<UIEvent> uiEvents = new ArrayList<UIEvent>();
+					Resource uiEvents = new ResourceImpl();
 					for (Event event : events) {
 						UIEvent uiEvent = ModelFactory.eINSTANCE.createUIEvent();
 						uiEvent.setName(event.getSummary());
 						uiEvent.setObject(event);
-						uiEvents.add(uiEvent);
+						uiEvents.getContents().add(uiEvent);
 					}
 					selection.setSelection(uiEvents);
 				}
