@@ -35,14 +35,7 @@ public class EventsLoadHandler {
 			for (CalendarListEntry calendarListEntry : calendars) {
 				System.out.println(calendarListEntry.getSummary());
 				if (calendarListEntry.getSummary().equals("fhe4course@gmail.com")) {
-					List<Event> events = gService.getEvents(calendarListEntry);
-					Resource uiEvents = new ResourceImpl();
-					for (Event event : events) {
-						UIEvent uiEvent = ModelFactory.eINSTANCE.createUIEvent();
-						uiEvent.setName(event.getSummary());
-						uiEvent.setObject(event);
-						uiEvents.getContents().add(uiEvent);
-					}
+					Resource uiEvents = getUIEventsResource(gService.getEvents(calendarListEntry));
 					selection.setSelection(uiEvents);
 				}
 			}
@@ -51,4 +44,14 @@ public class EventsLoadHandler {
 		}
 	}
 
+	public static Resource getUIEventsResource(List<Event> events) {
+		Resource uiEvents = new ResourceImpl();
+		for (Event event : events) {
+			UIEvent uiEvent = ModelFactory.eINSTANCE.createUIEvent();
+			uiEvent.setName(event.getSummary());
+			uiEvent.setObject(event);
+			uiEvents.getContents().add(uiEvent);
+		}
+		return uiEvents;
+	}
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_rwWrYP1VEeWKXOIqvDBQCg" elementId="org.eclipse.e4.ide.application" bindingContexts="_rwWraf1VEeWKXOIqvDBQCg">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_rwWrYf1VEeWKXOIqvDBQCg" label="at.example.calendar" width="500" height="400">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_rwWrYf1VEeWKXOIqvDBQCg" elementId="at.example.calendar.window.main" label="at.example.calendar" width="500" height="400">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_lL5DYP1WEeWKXOIqvDBQCg" elementId="at.example.calendar.perspectivestack.0">
       <children xsi:type="advanced:Perspective" xmi:id="_l_UrcP1WEeWKXOIqvDBQCg" elementId="at.example.calendar.perspective.0" toBeRendered="false" visible="false">
         <children xsi:type="basic:PartStack" xmi:id="_nAsB0P1WEeWKXOIqvDBQCg" elementId="at.example.calendar.partstack.0">
@@ -16,7 +16,7 @@
           </children>
         </children>
       </children>
-      <children xsi:type="advanced:Perspective" xmi:id="__AUUYALgEeauPuU2sbQaKA" elementId="at.example.calendar.perspective.1">
+      <children xsi:type="advanced:Perspective" xmi:id="__AUUYALgEeauPuU2sbQaKA" elementId="at.example.calendar.perspective.list" selectedElement="_DXESMALhEeauPuU2sbQaKA" label="list">
         <children xsi:type="basic:PartSashContainer" xmi:id="_DXESMALhEeauPuU2sbQaKA" elementId="at.example.calendar.partsashcontainer.0" horizontal="true">
           <children xsi:type="basic:PartStack" xmi:id="_MTbJMALhEeauPuU2sbQaKA" elementId="at.example.calendar.partstack.left">
             <children xsi:type="basic:Part" xmi:id="_H6eL8ALhEeauPuU2sbQaKA" elementId="at.example.calendar.part.list" contributionURI="bundleclass://at.example.calendar/at.example.calendar.parts.EventListPart" label="list">
@@ -30,10 +30,17 @@
         </children>
       </children>
     </children>
+    <mainMenu xmi:id="_RUG0AAfzEea8L9MZugp-Yw" elementId="at.example.calendar.menu.main">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_RkD7kQfzEea8L9MZugp-Yw" elementId="at.example.calendar.handledmenuitem.list" label="list">
+        <command href="../at.example.calendar.config/fragment.e4xmi#_KqQLJAfzEea8L9MZugp-Yw"/>
+        <parameters xmi:id="_RkD7kgfzEea8L9MZugp-Yw" elementId="perspective.list" name="at.example.calendar.commandparameter.perspective.id" value="at.example.calendar.perspective.list"/>
+      </children>
+    </mainMenu>
   </children>
   <handlers xmi:id="_-JGngP1ZEeWKXOIqvDBQCg" elementId="at.example.calendar.handler.add.calendar" contributionURI="bundleclass://at.example.calendar/at.example.calendar.handlers.AddCalendarHandler" command="_0FGL8P1ZEeWKXOIqvDBQCg"/>
   <handlers xmi:id="__aBmYP1lEeW-8cwmcVyK2g" elementId="at.example.calendar.handler.events.load" contributionURI="bundleclass://at.example.calendar/at.example.calendar.handlers.EventsLoadHandler" command="_7lDf8P1lEeW-8cwmcVyK2g"/>
   <handlers xmi:id="_B8SnMALqEeauPuU2sbQaKA" elementId="at.example.calendar.handler.saveall" contributionURI="bundleclass://at.example.calendar/at.example.calendar.handlers.SaveAllHandler" command="__OGioALpEeauPuU2sbQaKA"/>
+  <handlers xmi:id="_QcB5UAfvEea8L9MZugp-Yw" elementId="at.example.calendar.handler.switch.perspective" contributionURI="bundleclass://at.example.calendar/at.example.calendar.handlers.SwitchPerspectiveHandler" command="_LG5AoAfvEea8L9MZugp-Yw"/>
   <rootContext xmi:id="_rwWraf1VEeWKXOIqvDBQCg" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_rwWrav1VEeWKXOIqvDBQCg" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_rwWra_1VEeWKXOIqvDBQCg" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
@@ -42,6 +49,9 @@
   <commands xmi:id="_0FGL8P1ZEeWKXOIqvDBQCg" elementId="at.example.calendar.command.add.calendar" commandName="add calendar"/>
   <commands xmi:id="_7lDf8P1lEeW-8cwmcVyK2g" elementId="at.example.calendar.command.events.load" commandName="events load"/>
   <commands xmi:id="__OGioALpEeauPuU2sbQaKA" elementId="at.example.calendar.command.saveall" commandName="save all"/>
+  <commands xmi:id="_LG5AoAfvEea8L9MZugp-Yw" elementId="at.example.calendar.command.switch.perspective" commandName="switch perspective">
+    <parameters xmi:id="_lxpzEAfvEea8L9MZugp-Yw" elementId="at.example.calendar.commandparameter.perspective.id" name="perspective id" optional="false"/>
+  </commands>
   <addons xmi:id="_rwWrYv1VEeWKXOIqvDBQCg" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_rwWrY_1VEeWKXOIqvDBQCg" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_rwWrZP1VEeWKXOIqvDBQCg" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
