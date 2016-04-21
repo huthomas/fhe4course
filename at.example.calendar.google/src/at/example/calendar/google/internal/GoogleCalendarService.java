@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+
+import org.osgi.service.event.EventAdmin;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -34,6 +37,13 @@ public class GoogleCalendarService implements IGoogleCalendarService {
 	private Calendar calendarService;
 	private JsonFactory jsonFactory;
 	private HttpTransport httpTransport;
+
+	private GoogleCalendarEventObserver activeObserver;
+	private EventAdmin eventAdmin;
+
+	public void setEventAdmin(EventAdmin eventAdmin) {
+		this.eventAdmin = eventAdmin;
+	}
 
 	protected Calendar getCalendarService() throws GeneralSecurityException, IOException {
 		if (calendarService == null) {
@@ -73,6 +83,15 @@ public class GoogleCalendarService implements IGoogleCalendarService {
 		return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
 	}
 
+	protected void sendEventsUpdate(CalendarListEntry calendar, List<Event> events) {
+		if (eventAdmin != null) {
+			HashMap<String, Object> eventMap = new HashMap<String, Object>();
+			eventMap.put("org.eclipse.e4.data", events);
+			System.out.println("Sending update for calendar " + calendar.getId());
+			eventAdmin.sendEvent(new org.osgi.service.event.Event(IGoogleCalendarService.EVENTSUPDATE, eventMap));
+		}
+	}
+
 	@Override
 	public List<CalendarListEntry> getCalendars() throws GeneralSecurityException, IOException {
 		Calendar gService = getCalendarService();
@@ -90,6 +109,7 @@ public class GoogleCalendarService implements IGoogleCalendarService {
 		if (events != null && !events.isEmpty()) {
 			return events.getItems();
 		}
+
 		return Collections.emptyList();
 	}
 
@@ -114,5 +134,15 @@ public class GoogleCalendarService implements IGoogleCalendarService {
 		Calendar gService = getCalendarService();
 
 		gService.events().update("primary", event.getId(), event).execute();
+	}
+
+	@Override
+	public synchronized void startEventObserver(CalendarListEntry calendar)
+			throws GeneralSecurityException, IOException {
+		if (activeObserver != null) {
+			activeObserver.stop();
+		}
+		activeObserver = new GoogleCalendarEventObserver(this, calendar);
+		activeObserver.start();
 	}
 }
