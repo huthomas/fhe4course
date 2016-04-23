@@ -1,11 +1,14 @@
 
 package at.example.calendar.parts;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.ui.advanced.MPerspective;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
@@ -23,6 +26,11 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+
+import com.google.api.services.calendar.model.Event;
+
+import at.example.calendar.google.IGoogleCalendarService;
+import at.example.calendar.handlers.EventsLoadHandler;
 
 public class EventListPart {
 	private TableViewer viewer;
@@ -44,12 +52,11 @@ public class EventListPart {
 		viewer.setContentProvider(new AdapterFactoryContentProvider(factory));
 
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
-
+			// set selection to perspective context and create an edit part
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
 				StructuredSelection selection = (StructuredSelection) viewer.getSelection();
 				if (selection != null && !selection.isEmpty()) {
-					System.out.println("selection " + selection.getFirstElement());
 					perspective.getContext().set("event.list.selection", selection.getFirstElement());
 
 					MPart editPart = partService.createPart("at.example.calendar.partdescriptor.event.edit");
@@ -68,5 +75,11 @@ public class EventListPart {
 		if (viewer != null && !viewer.getTable().isDisposed()) {
 			viewer.setInput(events);
 		}
+	}
+
+	@Inject
+	@Optional
+	void updateEvent(@UIEventTopic(IGoogleCalendarService.EVENTSUPDATE) List<Event> events) {
+		viewer.setInput(EventsLoadHandler.getUIEventsResource(events));
 	}
 }

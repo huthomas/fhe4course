@@ -31,9 +31,8 @@
       </children>
     </children>
     <mainMenu xmi:id="_RUG0AAfzEea8L9MZugp-Yw" elementId="at.example.calendar.menu.main">
-      <children xsi:type="menu:HandledMenuItem" xmi:id="_RkD7kQfzEea8L9MZugp-Yw" elementId="at.example.calendar.handledmenuitem.list" label="list">
-        <command href="../at.example.calendar.config/fragment.e4xmi#_KqQLJAfzEea8L9MZugp-Yw"/>
-        <parameters xmi:id="_RkD7kgfzEea8L9MZugp-Yw" elementId="perspective.list" name="at.example.calendar.commandparameter.perspective.id" value="at.example.calendar.perspective.list"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_hbluEAkpEea1KYxYXr7x1A" elementId="at.example.calendar.handledmenuitem.list" label="list" command="_LG5AoAfvEea8L9MZugp-Yw">
+        <parameters xmi:id="_kURycAkpEea1KYxYXr7x1A" elementId="calendar.parameter.list" name="at.example.calendar.commandparameter.perspective.id" value="at.example.calendar.perspective.list"/>
       </children>
     </mainMenu>
   </children>
